@@ -430,6 +430,50 @@
 </style>
 </head>
 <body>
+<div id="gate" style="position:fixed;inset:0;z-index:9999;background:#0D2818;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Jost','Futura','Century Gothic',sans-serif">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 72" width="64" style="margin-bottom:24px">
+    <polygon points="28,64 56,10 84,64" fill="#2A5A35"/>
+    <polygon points="16,64 44,4 72,64" fill="#C8D8C0"/>
+    <polygon points="28,64 44,28 60,64" fill="#A0B8A0" fill-opacity="0.3"/>
+    <line x1="44" y1="4" x2="16" y2="64" stroke="#B8942A" stroke-width="1.5"/>
+    <line x1="44" y1="4" x2="72" y2="64" stroke="#B8942A" stroke-width="1.5"/>
+    <line x1="16" y1="64" x2="84" y2="64" stroke="#B8942A" stroke-width="1"/>
+  </svg>
+  <div style="font-size:18px;font-weight:600;letter-spacing:6px;color:#E8F0E0;margin-bottom:4px">LOMA</div>
+  <div style="width:48px;height:1px;background:#B8942A;margin:6px 0 4px;opacity:.8"></div>
+  <div style="font-size:8px;font-weight:200;letter-spacing:6px;color:#5A8A65;margin-bottom:40px">CAPITAL</div>
+  <div style="width:280px">
+    <div style="font-size:8px;font-weight:300;letter-spacing:4px;text-transform:uppercase;color:rgba(200,216,192,0.5);margin-bottom:10px;text-align:center">Private Preview</div>
+    <input id="gate-pw" type="password" placeholder="Enter password" autocomplete="off"
+      style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(200,216,192,0.2);color:#E8F0E0;font-family:'Jost',sans-serif;font-size:13px;font-weight:300;letter-spacing:2px;padding:12px 16px;outline:none;text-align:center;margin-bottom:8px"
+      onkeydown="if(event.key==='Enter')checkPw()"/>
+    <button onclick="checkPw()"
+      style="width:100%;background:#B8942A;border:none;color:#0D2818;font-family:'Jost',sans-serif;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;padding:12px;cursor:pointer">
+      Enter
+    </button>
+    <div id="gate-err" style="font-size:10px;color:rgba(200,100,100,0.7);text-align:center;margin-top:10px;min-height:16px"></div>
+  </div>
+</div>
+<script>
+(function(){
+  if(sessionStorage.getItem('lc_auth')==='1'){
+    var g=document.getElementById('gate');
+    if(g)g.style.display='none';
+  }
+})();
+function checkPw(){
+  var pw=document.getElementById('gate-pw').value;
+  if(pw==='lomaland'){
+    sessionStorage.setItem('lc_auth','1');
+    document.getElementById('gate').style.display='none';
+  } else {
+    document.getElementById('gate-err').textContent='Incorrect password';
+    document.getElementById('gate-pw').value='';
+    document.getElementById('gate-pw').focus();
+  }
+}
+</script>
+
 
 <!-- ═══════════════ NAV ═══════════════ -->
 <nav>
